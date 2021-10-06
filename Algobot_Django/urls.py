@@ -15,10 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.contrib.auth.views import login_required
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('algobot.urls')),
-    path(r'login/$', login_required,{'template_name': 'account/login.html'} )
 ]

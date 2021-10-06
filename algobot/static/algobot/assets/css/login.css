@@ -191,10 +191,10 @@ a {
     text-align: center
 }
 
-.card {
-    width: 500px;
-    left: 100px
-}
+/*.card {*/
+/*    width: 500px;*/
+/*    left: 100px*/
+/*}*/
 
 ::placeholder {
     color: #b3b3b3
