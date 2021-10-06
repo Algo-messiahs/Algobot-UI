@@ -143,5 +143,5 @@ cython_debug/
 # Editor
 .idea/
 
-# Project env 
+# Project env
 env/
