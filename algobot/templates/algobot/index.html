@@ -1,4 +1,8 @@
 {% extends 'algobot/header.html' %}
 {% block content %}
-<h1>This is the Home Page</h1>
+{% load static %}
+<link rel="stylesheet" href="{% static 'algobot/home.css' %}" type="text/css">
+
+<h1 class="home-h1">This is the Home Page</h1>
+
 {% endblock %}
