@@ -90,6 +90,13 @@ DATABASES = {
         'PORT': env("DATABASE_PORT"),
     }
 }
+# path -> example/setting.py
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+#baltlogs.com
 
 
 # Password validation
