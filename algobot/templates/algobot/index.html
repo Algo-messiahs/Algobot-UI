@@ -81,52 +81,93 @@
         </div>
     </div>
 </section>
-<!-- Signup-->
-<section class="signup-section" id="signup">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                <h2 class="text-white mb-5">Subscribe now!</h2>
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <!-- Email address input-->
-                    <div class="row input-group-newsletter">
-                        <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                        <div class="col"><input class="form-control" id="id_password" type="password" placeholder="Enter password..." aria-label="Enter password.." data-sb-validations="required,password" /></div>
-                        <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">sign up!</button></div>
-                    </div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="password:required"> password is required.</div>
-                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3 mt-2 text-white">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+<!-- Login/Signup Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+            <div class="login-box">
+                <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                    <div class="login-space">
+                        <div class="login">
+                            <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Enter your username"> </div>
+                            <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Enter your password"> </div>
+                            <div class="group"> <input id="check" type="checkbox" class="check" checked> <label for="check"><span class="icon"></span> Keep me Signed in</label> </div>
+                            <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
+                            <div class="hr"></div>
+                            <div class="foot"> <a href="#">Forgot Password?</a> </div>
+                        </div>
+                        <div class="sign-up-form">
+                            <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"> </div>
+                            <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
+                            <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
+                            <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address"> </div>
+                            <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+                            <div class="hr"></div>
+                            <div class="foot"> <label for="tab-1">Already Member?</label> </div>
                         </div>
                     </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
-                </form>
-            </div>
-        </div>
+                </div>
+</div>
+</div>
     </div>
-</section>
+
+<!-- baltlogs.com -->
+
+<!--HTML content ends here!-->
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{#<section class="signup-section" id="signup">#}
+{#    <div class="container px-4 px-lg-5">#}
+{#        <div class="row gx-4 gx-lg-5">#}
+{#            <div class="col-md-10 col-lg-8 mx-auto text-center">#}
+{#                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>#}
+{#                <h2 class="text-white mb-5">Subscribe now!</h2>#}
+{#                <!-- * * * * * * * * * * * * * * *-->#}
+{#                <!-- * * SB Forms Contact Form * *-->#}
+{#                <!-- * * * * * * * * * * * * * * *-->#}
+{#                <!-- This form is pre-integrated with SB Forms.-->#}
+{#                <!-- To make this form functional, sign up at-->#}
+{#                <!-- https://startbootstrap.com/solution/contact-forms-->#}
+{#                <!-- to get an API token!-->#}
+{#                <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">#}
+{#                    <!-- Email address input-->#}
+{#                    <div class="row input-group-newsletter">#}
+{#                        <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>#}
+{#                        <div class="col"><input class="form-control" id="id_password" type="password" placeholder="Enter password..." aria-label="Enter password.." data-sb-validations="required,password" /></div>#}
+{#                        <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">sign up!</button></div>#}
+{#                    </div>#}
+{#                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>#}
+{#                    <div class="invalid-feedback mt-2" data-sb-feedback="password:required"> password is required.</div>#}
+{#                    <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>#}
+{#                    <!-- Submit success message-->#}
+{#                    <!---->#}
+{#                    <!-- This is what your users will see when the form-->#}
+{#                    <!-- has successfully submitted-->#}
+{#                    <div class="d-none" id="submitSuccessMessage">#}
+{#                        <div class="text-center mb-3 mt-2 text-white">#}
+{#                            <div class="fw-bolder">Form submission successful!</div>#}
+{#                            To activate this form, sign up at#}
+{#                            <br />#}
+{#                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- Submit error message-->#}
+{#                    <!---->#}
+{#                    <!-- This is what your users will see when there is-->#}
+{#                    <!-- an error submitting the form-->#}
+{#                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 <!-- Contact-->
 <section class="contact-section bg-black">
     <div class="container px-4 px-lg-5">
