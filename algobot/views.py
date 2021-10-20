@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -32,3 +32,23 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+def signin(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            form = AuthenticationForm()
+            return render(request, 'registration/login.html', {'form': form})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'registration/login.html', {'form': form})
