@@ -16,7 +16,7 @@ def success(request):
 
 
 # Register page
-def register(request):
+def signup(request):
     if request.user.is_authenticated:
         return redirect('/')
 
@@ -29,9 +29,11 @@ def register(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('success')
+        else:
+            return render(request, 'registration/register.html', {'form': form})
     else:
         form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+        return render(request, 'registration/register.html', {'form': form})
 
 
 def signin(request):
