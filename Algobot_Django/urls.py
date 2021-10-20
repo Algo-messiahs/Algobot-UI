@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
+from django.contrib.auth.views import login_required
+from django.contrib.auth import views as auth_views
+from algobot import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('algobot.urls')),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('success/', views.success, name='success'),
+    path('register/', views.register, name='register'),
+
 ]
