@@ -8,8 +8,8 @@ def index(request):
     return render(request, 'algobot/index.html')
 
 
-def login(request):
-    return render(request, 'algobot/login.html')
+# def login(request):
+#     return render(request, 'algobot/login.html')
 
 
 # Login
