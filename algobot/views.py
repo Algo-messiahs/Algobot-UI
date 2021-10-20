@@ -4,21 +4,22 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 
+# Home page
 def index(request):
     return render(request, 'algobot/index.html')
 
 
-# def login(request):
-#     return render(request, 'algobot/login.html')
-
-
-# Login
+# Post-login success page
 @login_required
 def success(request):
     return render(request, "registration/success.html", {})
 
 
+# Register page
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
