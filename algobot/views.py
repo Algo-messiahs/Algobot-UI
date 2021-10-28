@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from Algobot_Backend import portfolio_manager as pm
 
 
 # Home page
@@ -12,7 +13,16 @@ def index(request):
 # Post-login success page
 @login_required
 def success(request):
-    return render(request, "registration/success.html", {})
+    tradeSession = pm.TradeSession()
+    account = tradeSession.connect_api()
+    context = {'account_number': account.account_number,
+               'buying_power': account.buying_power,
+               'account_status': account.status,
+               'equity': account.equity,
+               'cash': account.cash,
+               'user_name': request.user.username
+               }
+    return render(request, "registration/success.html", context)
 
 
 # Register page
@@ -35,7 +45,7 @@ def signup(request):
         form = UserCreationForm()
         return render(request, 'registration/register.html', {'form': form})
 
-
+#Sign in page
 def signin(request):
     if request.user.is_authenticated:
         return redirect('/')
