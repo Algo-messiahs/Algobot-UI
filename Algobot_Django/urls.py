@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('algobot.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('success/', views.success, name='success'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('register/', views.signup, name='register'),
 
 ]

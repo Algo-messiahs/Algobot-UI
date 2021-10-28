@@ -12,7 +12,7 @@ def index(request):
 
 # Post-login success page
 @login_required
-def success(request):
+def dashboard(request):
     tradeSession = pm.TradeSession()
     account = tradeSession.connect_api()
     context = {'account_number': account.account_number,
@@ -22,7 +22,7 @@ def success(request):
                'cash': account.cash,
                'user_name': request.user.username
                }
-    return render(request, "registration/success.html", context)
+    return render(request, "registration/dashboard.html", context)
 
 
 # Register page
