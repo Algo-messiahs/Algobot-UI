@@ -1,5 +1,6 @@
 import alpaca_trade_api as tradeapi
 import os
+import websocket, json
 
 from pathlib import Path
 import sys
@@ -96,6 +97,13 @@ class TradeSession:
             return True
         return False
 
+    def get_market_stream(self):
+        socket = "wss://data.alpaca.markets/stream"
+        ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_error=on_error,
+                                    on_close=on_close)
+        ws.run_forever()
+
+
     # CLI that selects user bot options
     # It is used to call from the test 
     # It is connected to the Alpaca API as well 
@@ -110,12 +118,13 @@ def cli():
     print("3. List Assets")
     print("4. Show Gains and Losses")
     print("5. Look Up Stock Price")
-    print("6. Exit AlgoBot Project") 
+    print("6. Market Stream")
+    print("7. Exit AlgoBot Project")
 def menu():
     cli()
     ''' Main menu to choose an item ''' 
     chosen_element = 0
-    chosen_element = input("Enter a selection from 1 to 6: ")
+    chosen_element = input("Enter a selection from 1 to 7 : ")
     if int(chosen_element) == 1:
         print('Account Information')
         x.connect_api()
@@ -143,13 +152,38 @@ def menu():
         print('Look Up Stock Price')
         x.look_up_stock()
         menu()
-        # exits the menu when 6 is selected. 
-    elif int(chosen_element) == 6:
+        # exits the menu when 6 is selected.
+    elif int(chosen_element) ==6:
+        print('Look Up Market Stream')
+        x.get_market_stream()
+        menu()
+    elif int(chosen_element) == 7:
         print('Goodbye!')
         sys.exit() 
     else:
-        print('Sorry, the value entered must be a number from 1 to 5, then try again!')
+        print('Sorry, the value entered must be a number from 1 to 6, then try again!')
 
+
+# Market Stream
+def on_open(ws):
+    print("opened")
+    auth_data = {
+        "action": "authenticate",
+        "data": {"key_id": config.APCA_API_KEY_ID, "secret_key": config.APCA_API_SECRET_KEY}
+    }
+    ws.send(json.dumps(auth_data))
+    listen_message = {"action": "listen", "data": {"streams": ["T.SPY"]}}
+    ws.send(json.dumps(listen_message))
+
+def on_error(ws, error):
+    print(error)
+
+def on_message(ws, message):
+    print("received a message")
+    print(message)
+
+def on_close( ws,close_status_code, close_msg):
+    print("closed connection")
 
 if __name__ == '__main__':
     x = TradeSession()
