@@ -21,9 +21,10 @@ def dashboard(request):
                'equity': account.equity,
                'cash': account.cash,
                'user_name': request.user.username,
-               'gain_loss': round(tradeSession.show_gain_loss(), 2)
-
-               }
+               'gain_loss': round(tradeSession.show_gain_loss(), 2),
+               'currency': account.currency,
+               'portfolio_value': account.portfolio_value
+ }
     return render(request, "registration/dashboard/dashboard.html", context)
 
 
