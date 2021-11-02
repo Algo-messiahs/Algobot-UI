@@ -146,7 +146,7 @@ def menu():
     cli()
     ''' Main menu to choose an item ''' 
     chosen_element = 0
-    chosen_element = input("Enter a selection from 1 to 7 : ")
+    chosen_element = input("Enter a selection from 1 to 9 : ")
     if int(chosen_element) == 1:
         print('Account Information')
         x.connect_api()
@@ -175,21 +175,21 @@ def menu():
         x.look_up_stock()
         menu()
         # exits the menu when 6 is selected.
-    elif int(chosen_element) == 7:
+    elif int(chosen_element) == 6:
         print('buy')
         x.buy()
         print("Stock ordered")
         menu()      
-    elif int(chosen_element) == 8:
+    elif int(chosen_element) == 7:
         print('Sell')
         x.sell()
         print("Stock sold")
         menu()        
-    elif int(chosen_element) ==6:
+    elif int(chosen_element) == 8:
         print('Look Up Market Stream')
         x.get_market_stream()
         menu()
-    elif int(chosen_element) == 7:
+    elif int(chosen_element) == 9:
         print('Goodbye!')
         sys.exit() 
     else:
