@@ -75,6 +75,28 @@ class TradeSession:
         nasdaq_assets = [a for a in active_assets if a.exchange == 'NASDAQ']
         print(nasdaq_assets)
 
+    def buy(self): # Returns nothing, makes call to buy stock
+        self.api.submit_order(
+        symbol= input("Enter Stock Name Example Apple(AAPL): "),
+        qty= input("Input Qty: "),
+        side='buy',
+        type='market',
+        time_in_force='gtc'
+    )
+    userInput = input # takes user input
+    print("Stock ordered")
+ 
+    def sell(self): # Returns nothing, makes call to sell stock
+        self.api.submit_order(
+        symbol= input("Enter Stock Name Example Apple(AAPL): "),
+        qty= input("Input Qty: "),
+        side='sell',
+        type='market',
+        time_in_force='gtc'
+    )
+    userInput = input # takes user input
+    print("Stock sold")
+
         # check if stock market is open
         # Was getting a error so made its own function for market is open
     def market_is_open(self):
@@ -153,6 +175,16 @@ def menu():
         x.look_up_stock()
         menu()
         # exits the menu when 6 is selected.
+    elif int(chosen_element) == 7:
+        print('buy')
+        x.buy()
+        print("Stock ordered")
+        menu()      
+    elif int(chosen_element) == 8:
+        print('Sell')
+        x.sell()
+        print("Stock sold")
+        menu()        
     elif int(chosen_element) ==6:
         print('Look Up Market Stream')
         x.get_market_stream()
