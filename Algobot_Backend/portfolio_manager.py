@@ -140,8 +140,10 @@ def cli():
     print("3. List Assets")
     print("4. Show Gains and Losses")
     print("5. Look Up Stock Price")
-    print("6. Market Stream")
-    print("7. Exit AlgoBot Project")
+    print("6. Buy Stock ")
+    print("7. Sell Stock")
+    print("8. Market Stream")
+    print("9. Exit AlgoBot Project")
 def menu():
     cli()
     ''' Main menu to choose an item ''' 
