@@ -39,7 +39,7 @@ def dashboard(request):
 # Register page
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('/dashboard')
 
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -59,7 +59,7 @@ def signup(request):
 #Sign in page
 def signin(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('/dashboard')
 
     if request.method == "POST":
         username = request.POST['username']
