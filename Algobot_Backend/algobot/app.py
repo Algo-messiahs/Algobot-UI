@@ -7,8 +7,8 @@ app = Chalice(app_name='algobot')
 API_KEY = "PKXOVXRJV4Z6FDR4KBA6"
 SECRET_KEY = "9ftE9A87NOJJAFXr3XTHYl9z9T2vcVxl8EGTJKuR"
 BASE_URL = "https://paper-api.alpaca.markets"
-#ORDERS_URL =
-#HEADERS =
+ORDERS_URL = "{}/v2/orders".format(BASE_URL)
+HEADERS = {'APCA-API-KEY-ID': API_KEY, 'APCA-API-SECRET-KEY': SECRET_KEY}
 
 @app.route('/buy_stock', methods=['POST'])
 def buy_stock():
