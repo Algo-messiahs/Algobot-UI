@@ -25,10 +25,14 @@ def dashboard(request):
                'currency': account.currency,
                'portfolio_value': account.portfolio_value,
                'long_market_value': account.long_market_value,
-               'short_market_value':account.short_market_value,
-                'regt_buying_power': account.regt_buying_power
+               'short_market_value': account.short_market_value,
+                'regt_buying_power': account.regt_buying_power,
+               'maintenance_margin': account.maintenance_margin,
+               'initial_margin': account.initial_margin
 
- }
+
+
+               }
     return render(request, "registration/dashboard/dashboard.html", context)
 
 
