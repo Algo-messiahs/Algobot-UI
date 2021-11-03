@@ -23,7 +23,11 @@ def dashboard(request):
                'user_name': request.user.username,
                'gain_loss': round(tradeSession.show_gain_loss(), 2),
                'currency': account.currency,
-               'portfolio_value': account.portfolio_value
+               'portfolio_value': account.portfolio_value,
+               'long_market_value': account.long_market_value,
+               'short_market_value':account.short_market_value,
+                'regt_buying_power': account.regt_buying_power
+
  }
     return render(request, "registration/dashboard/dashboard.html", context)
 
