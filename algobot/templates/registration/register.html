@@ -1,13 +1,16 @@
 {% include 'algobot/partials/header.html' %}
 {% include 'algobot/partials/navbar.html' %}
-<section>
-  <div class="container">
+{% load static %}
+<link href="{% static 'algobot/assets/css/register-page.css' %}" type="text/css" rel="stylesheet" />
+
+<section class="register-page">
+  <div class="container register-container">
     <div class="row">
       <div class="col-md-12 col-centered">
         <h1 class="mt-5 mb-3">Register</h1>
       </div>
     </div>
-    <div class="row">
+    <div class="row form-row">
       <div class="col-md-6 offset-md-3 mt-3">
         <form method="post" action="{% url 'register' %}">
           {% csrf_token %} {% for field in form %}
@@ -31,6 +34,7 @@
         </form>
       </div>
     </div>
+    <p class="register-login"><a href="/login">Or click here to login.</a></p>
   </div>
 </section>
 {% include 'algobot/partials/footer.html' %}

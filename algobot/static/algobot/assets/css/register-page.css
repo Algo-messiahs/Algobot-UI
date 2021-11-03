@@ -1,0 +1,22 @@
+.register-page {
+    background: url("../img/bg-signup.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 86.5vh;
+}
+
+.register-container {
+    padding: 250px 0 500px 0;
+}
+h1 {
+    text-align: center;
+}
+h1, label {
+    color: #fff;
+}
+p.register-login {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
