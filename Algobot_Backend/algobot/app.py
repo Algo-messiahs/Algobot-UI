@@ -4,9 +4,9 @@ import requests, json
 app = Chalice(app_name='algobot')
 
 # Alpaca API info needs to be exported below
-#API_KEY =
-#SECRET_KEY =
-#BASE_URL =
+API_KEY = "PKXOVXRJV4Z6FDR4KBA6"
+SECRET_KEY = "9ftE9A87NOJJAFXr3XTHYl9z9T2vcVxl8EGTJKuR"
+BASE_URL = "https://paper-api.alpaca.markets"
 #ORDERS_URL =
 #HEADERS =
 
