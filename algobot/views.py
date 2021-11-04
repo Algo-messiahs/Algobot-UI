@@ -16,7 +16,7 @@ def dashboard(request):
     tradeSession = pm.TradeSession()
     account = tradeSession.connect_api()
     context = {'account_number': account.account_number,
-               'buying_power': account.buying_power,
+               'buying_power': round(float(account.buying_power),2),
                'account_status': account.status,
                'equity': account.equity,
                'cash': account.cash,
@@ -28,9 +28,8 @@ def dashboard(request):
                'short_market_value': account.short_market_value,
                 'regt_buying_power': account.regt_buying_power,
                'maintenance_margin': account.maintenance_margin,
-               'initial_margin': account.initial_margin
-
-
+               'initial_margin': account.initial_margin,
+               'market_status' : tradeSession.market_is_open()
 
                }
     return render(request, "registration/dashboard/dashboard.html", context)
