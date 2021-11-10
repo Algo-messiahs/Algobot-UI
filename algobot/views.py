@@ -1,5 +1,6 @@
 import alpaca_trade_api as tradeapi
-import time
+import datetime as dt
+from datetime import date, timedelta
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -16,15 +17,26 @@ def index(request):
 # Post-login success page
 @login_required
 def dashboard(request):
+    # API call for 'portfolio_history'
     api = tradeapi.REST(config.APCA_API_KEY_ID, config.APCA_API_SECRET_KEY,
                             base_url=config.APCA_API_BASE_URL,api_version='v2')
+
     tradeSession = pm.TradeSession()
     account = tradeSession.connect_api()
-    port_hist = api.get_portfolio_history(date_start="2021-10-27", date_end=None, period=None, timeframe="1D", extended_hours=None)
+
+    # Get current date
+    today = date.today()
+    td = timedelta(14)
+
+    # Portfolio History
+    port_hist = api.get_portfolio_history(date_start=str(today-td), date_end=None, period=None, timeframe="1D", extended_hours=None)
+
+    # List of timestamps formatted to YYYY-MM-DD
     tmstps = []
     for times in port_hist.timestamp:
-        tmstps.append(time.ctime(times))
-    print(tmstps)
+        time = dt.datetime.fromtimestamp(times).strftime("%Y-%m-%d")
+        tmstps.append(time)
+    print("TMTPS:", tmstps)
     context = {'account_number': account.account_number,
                'buying_power': round(float(account.buying_power),2),
                'account_status': account.status,
@@ -41,7 +53,7 @@ def dashboard(request):
                'initial_margin': account.initial_margin,
                'market_status' : tradeSession.market_is_open(),
                'portfolio_history': port_hist,
-               'timestamps': tmstps
+               'timestamps': tmstps,
 
                }
     return render(request, "registration/dashboard/dashboard.html", context)
