@@ -1,8 +1,10 @@
+import alpaca_trade_api as tradeapi
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from Algobot_Backend import portfolio_manager as pm
+from Algobot_Backend import portfolio_manager as pm, config
+
 
 
 # Home page
@@ -13,8 +15,12 @@ def index(request):
 # Post-login success page
 @login_required
 def dashboard(request):
+    api = tradeapi.REST(config.APCA_API_KEY_ID, config.APCA_API_SECRET_KEY,
+                            base_url=config.APCA_API_BASE_URL,api_version='v2')
     tradeSession = pm.TradeSession()
     account = tradeSession.connect_api()
+    port_hist = api.get_portfolio_history(date_start=None, date_end=None, period=None, timeframe=None, extended_hours=None)
+    print(port_hist)
     context = {'account_number': account.account_number,
                'buying_power': round(float(account.buying_power),2),
                'account_status': account.status,
@@ -29,7 +35,8 @@ def dashboard(request):
                 'regt_buying_power': account.regt_buying_power,
                'maintenance_margin': account.maintenance_margin,
                'initial_margin': account.initial_margin,
-               'market_status' : tradeSession.market_is_open()
+               'market_status' : tradeSession.market_is_open(),
+               'portfolio_history': port_hist
 
                }
     return render(request, "registration/dashboard/dashboard.html", context)
