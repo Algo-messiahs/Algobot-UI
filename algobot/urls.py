@@ -6,6 +6,7 @@ from . import views
 app_name = 'algobot'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('sell_stock',views.sell_stock, name='sell_stock')
     # path('login/', views.login, name='login'),
     # path(r'login/$', login_required, {'template_name': 'account/login.html'}),
 ]

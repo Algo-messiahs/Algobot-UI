@@ -1,6 +1,11 @@
+import json
+
 import alpaca_trade_api as tradeapi
 import datetime as dt
 from datetime import date, timedelta
+
+import simplejson as simplejson
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -31,6 +36,12 @@ def dashboard(request):
     # Portfolio History
     port_hist = api.get_portfolio_history(date_start=str(today-td), date_end=None, period=None, timeframe="1D", extended_hours=None)
 
+    # Position Symbols
+    assets = tradeSession.get_all_assets()
+    assetSymbols = []
+    for asset in assets:
+        assetSymbols.append(asset.symbol)
+
     # List of timestamps formatted to YYYY-MM-DD
     tmstps = []
     for times in port_hist.timestamp:
@@ -54,6 +65,8 @@ def dashboard(request):
                'market_status' : tradeSession.market_is_open(),
                'portfolio_history': port_hist,
                'timestamps': tmstps,
+               'list_of_position': assetSymbols,
+               'list_of_assets': assetSymbols
 
                }
     return render(request, "registration/dashboard/dashboard.html", context)
@@ -98,3 +111,37 @@ def signin(request):
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
+
+
+def sell_stock(request):
+
+    # Instatiate API
+    api = tradeapi.REST(config.APCA_API_KEY_ID, config.APCA_API_SECRET_KEY,
+                        base_url=config.APCA_API_BASE_URL, api_version='v2')
+    tradeSession = pm.TradeSession()
+    account = tradeSession.connect_api()
+
+    # Get Symbol and Quantity from template
+    symbol = request.POST.get("symbol")
+    quantity = request.POST.get("quantity")
+
+    # Sell stock
+    response = tradeSession.sellStock(symbol=symbol, quantity=quantity)
+
+    # Create JSON Object with API response
+    api_response = {'Success': response }
+
+    data = simplejson.dumps(api_response)
+
+    return HttpResponse(data, content_type='application/json')
+
+def buy_stock(request):
+
+    api = tradeapi.REST(config.APCA_API_KEY_ID, config.APCA_API_SECRET_KEY,
+                        base_url=config.APCA_API_BASE_URL, api_version='v2')
+
+    tradeSession = pm.TradeSession()
+    account = tradeSession.connect_api()
+    print("buy Stock Module")
+    print(account)
+    return HttpResponse(request, 'algobot/index.html')

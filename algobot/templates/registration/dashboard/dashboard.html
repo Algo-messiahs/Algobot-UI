@@ -40,14 +40,20 @@
 
                     <div class="row">
 
-                        <!-- Area Chart -->
-                        {% include 'registration/dashboard/area_chart.html' %}
+                        <!-- Portfolio Value Card  -->
+                        {% include 'registration/dashboard/portfolio_value_chart.html' %}
 
-                        <!-- Pie Chart -->
+                        <!-- Account Information Card -->
                         {% include 'registration/dashboard/pie_chart.html' %}
 
                     </div>
-                    {{ timestamps }}
+
+{#                    <div class="row">#}
+{##}
+{#                        <!-- Market Stream Card -->#}
+{#                        {% include 'registration/dashboard/market_stream.html' %}#}
+{##}
+{#                   </div>#}
 
                     <!-- Content Row -->
                     <div class="row">
@@ -102,9 +108,17 @@
     <!-- Logout Modal-->
     {% include 'registration/dashboard/logout_modal.html' %}
 
+    <!-- Buy Modal-->
+    {% include 'registration/dashboard/buy_stock_modal.html' %}
+
+    <!-- Sell Modal-->
+    {% include 'registration/dashboard/sell_stock_modal.html' %}
+
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'algobot/assets/dashboard_assets/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'algobot/assets/dashboard_assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js.map" crossorigin="anonymous"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{% static 'algobot/assets/dashboard_assets/jquery-easing/jquery.easing.min.js' %}"></script>
@@ -114,6 +128,11 @@
 
     <!-- Page level plugins -->
     <script src="{% static 'algobot/assets/dashboard_assets/chart.js/Chart.min.js' %}"></script>
+
+    <!-- Toastr Notification -->
+    <script src="{% static 'algobot/assets/js/toastr.min.js' %}"></script>
+
+
 
     <!-- Page level custom scripts -->
 
@@ -204,14 +223,15 @@ function formatDate(input) {
 var ctx = document.getElementById("myAreaChart");
 
 // Create array of timestamps
-    // I tried to bring the raw timestamps to JS and then format it to YYYY-MM-DD on JS
+// I tried to bring the raw timestamps to JS and then format it to YYYY-MM-DD on JS
 var timestamps = {{ portfolio_history.timestamp }};
-console.log(timestamps.forEach(formatDate));
+
+
 
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: {{ portfolio_history.timestamp }},
+    labels: {{ timestamps|safe }},
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -299,6 +319,107 @@ var myLineChart = new Chart(ctx, {
 
 
 </script>
+
+
+<script type="text/javascript">
+$( document ).ready(function() {
+
+    setUpAssetDropDownListForSellingPosition();
+
+});
+
+
+function setUpAssetDropDownListForSellingPosition() {
+
+        // Get all positions
+        var assets = {{ list_of_assets|safe }}
+
+        // Stocks
+        for (i = 0; i < assets.length; ++i) {
+            optionText = assets[i];
+            optionValue = assets[i];
+
+            $('#stockPosition_sell').append(`<option value="${optionValue}"> ${optionText}</option>`);
+        }
+
+        // Shares
+        for (i = 1; i < 50; ++i) {
+            optionText = i;
+            optionValue = i;
+
+            $('#shares_sell').append(`<option value="${optionValue}"> ${optionText}</option>`);
+        }
+
+}
+
+
+$(function(){
+     $("#frm_sell_position").on('submit', function(e){
+         e.preventDefault();
+
+         // Get CSRF Token
+         const csrftoken = getCookie('csrftoken');
+
+         var symbol = $('#stockPosition_sell').val();
+
+         var quantity = $('#shares_sell').val();
+
+
+         $.ajax({
+             url: $(this).attr('action'),
+             method: 'POST',
+             headers: {'X-CSRFToken': csrftoken},
+             mode: 'same-origin',
+             data:{
+                 'symbol': symbol ,
+                 'quantity':quantity
+             },
+             success: function(data)
+             {
+                   //console.log(data.Success)
+                 if (data.Success == 'true'){
+                      $('#sellStockModal').modal('toggle');
+                      toastr.success('Your order was successfully submitted');
+                 }
+                 else
+                 {
+                      $('#sellStockModal').modal('toggle');
+                      toastr.error('Error encountered while submitting your order.');
+                 }
+
+             }
+         });
+
+     });
+});
+
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+
+
+
+
+</script>
+
+
 
 </body>
 </html>
