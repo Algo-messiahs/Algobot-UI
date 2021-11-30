@@ -1,10 +1,10 @@
 import mysql.connector
 
 mydb = mysql.connector.connect(
-  host="stock-db.c0fblm3kalfm.us-west-1.rds.amazonaws.com",
-  user="admin",
-  password="13579100",
-  database="stockdb"
+  host="",
+  user="",
+  password="",
+  database=""
 )
 
 
