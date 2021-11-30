@@ -24,8 +24,13 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">My Portfolio</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <form action="{% url 'algobot:generate_report' %}" method="POST" id="frm_generate_report">
+                        {% csrf_token %}
+                            <input type="submit" value="Generate Report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="btn_confirm_buy">
+                            <i class="fas fa-download fa-sm text-white-50"></i></input>
+{#                            <in href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i#}
+{#                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</in>#}
+                        </form>
                     </div>
 
                     <!-- Content Row -->
