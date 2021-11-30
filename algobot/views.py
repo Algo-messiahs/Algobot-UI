@@ -1,4 +1,7 @@
+import calendar
+import csv
 import json
+import time
 
 import alpaca_trade_api as tradeapi
 import datetime as dt
@@ -163,3 +166,29 @@ def buy_stock(request):
     data = simplejson.dumps(api_response)
 
     return HttpResponse(data, content_type='application/json')
+
+
+def generate_report(request):
+
+    # get timestamp
+    gmt = time.gmtime()
+    ts = calendar.timegm(gmt)
+
+    file_attachment = "attachment; filename=algobot_report_" + str(ts)+".csv"
+
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': file_attachment},
+    )
+    # Instatiate API
+    api = tradeapi.REST(config.APCA_API_KEY_ID, config.APCA_API_SECRET_KEY,
+                        base_url=config.APCA_API_BASE_URL, api_version='v2')
+    tradeSession = pm.TradeSession()
+    assets = tradeSession.get_all_assets()
+
+    # Write Position data to CSV
+    writer = csv.writer(response)
+    writer.writerow(['Id', 'Symbol', 'Average Entry Price', 'Current Price' , ' Quantity','Exchange'])
+    for asset in assets:
+        writer.writerow([asset.asset_id, asset.symbol, asset.avg_entry_price, asset.current_price, asset.qty, asset.exchange])
+    return response
