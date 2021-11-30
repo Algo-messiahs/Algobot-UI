@@ -76,12 +76,12 @@ class TradeSession:
 
         #Filter the assets down to just those on NASDAQ.
         nasdaq_assets = [a for a in active_assets if a.exchange == 'NASDAQ']
-        print(nasdaq_assets)
+        # print(nasdaq_assets)
+        return nasdaq_assets
 
     def get_all_assets(self):
         # Get a list of all active assets.
         active_assets = self.api.list_positions()
-
         return active_assets
 
 
@@ -116,27 +116,22 @@ class TradeSession:
         except:
             return 'false'
 
-
+    # buy Stock given the symbol and quantity
+    def buyStock(self, symbol, quantity):  # Returns nothing, makes call to buy stock
+        try:
+            self.api.submit_order(symbol=symbol, qty=quantity, side='buy', type='market', time_in_force='gtc')
+            return 'true'
+        except:
+            return 'false'
 
         # check if stock market is open
     def market_is_open(self):
-
         # Check if the market is open now.
         clock = self.api.get_clock()
-
         if clock.is_open:
             return 'Open'
         return 'Closed'
-
         print('The market is {}'.format('open.' if clock.is_open else 'closed.'))
-        # Check when the market was open on Dec. 1, 2018
-        # date = datetime.date.today()
-        # calendar = self.api.get_calendar(start=date, end=date)[0]
-        # print('The market opened at {} and closed at {} on {}.'.format(
-        #     calendar.open,
-        #     calendar.close,
-        #     date
-        # ))
 
     def is_tradable(self,asset):
         my_asset = self.api.get_asset(asset)

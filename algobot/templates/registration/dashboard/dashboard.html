@@ -326,13 +326,16 @@ $( document ).ready(function() {
 
     setUpAssetDropDownListForSellingPosition();
 
+    setUpAssetDropDownListForBuyingPosition();
+
+
 });
 
 
 function setUpAssetDropDownListForSellingPosition() {
 
         // Get all positions
-        var assets = {{ list_of_assets|safe }}
+        var assets = {{ list_of_position|safe }}
 
         // Stocks
         for (i = 0; i < assets.length; ++i) {
@@ -353,6 +356,30 @@ function setUpAssetDropDownListForSellingPosition() {
 }
 
 
+function setUpAssetDropDownListForBuyingPosition() {
+
+        // Get all positions
+        var assets = {{ list_of_assets|safe }}
+
+        // Stocks
+        for (i = 0; i < assets.length; ++i) {
+            optionText = assets[i];
+            optionValue = assets[i];
+
+            $('#stockPosition_buy').append(`<option value="${optionValue}"> ${optionText}</option>`);
+        }
+
+        // Shares
+        for (i = 1; i < 50; ++i) {
+            optionText = i;
+            optionValue = i;
+
+            $('#shares_buy').append(`<option value="${optionValue}"> ${optionText}</option>`);
+        }
+
+}
+
+// sell position form submit
 $(function(){
      $("#frm_sell_position").on('submit', function(e){
          e.preventDefault();
@@ -393,6 +420,46 @@ $(function(){
      });
 });
 
+// buy position form submit
+$(function(){
+     $("#frm_buy_position").on('submit', function(e){
+         e.preventDefault();
+
+         // Get CSRF Token
+         const csrftoken = getCookie('csrftoken');
+
+         var symbol = $('#stockPosition_buy').val();
+
+         var quantity = $('#shares_buy').val();
+
+
+         $.ajax({
+             url: $(this).attr('action'),
+             method: 'POST',
+             headers: {'X-CSRFToken': csrftoken},
+             mode: 'same-origin',
+             data:{
+                 'symbol': symbol ,
+                 'quantity':quantity
+             },
+             success: function(data)
+             {
+                   //console.log(data.Success)
+                 if (data.Success == 'true'){
+                      $('#buyStockModal').modal('toggle');
+                      toastr.success('Your order was successfully submitted');
+                 }
+                 else
+                 {
+                      $('#buyStockModal').modal('toggle');
+                      toastr.error('Error encountered while submitting your order.');
+                 }
+
+             }
+         });
+
+     });
+});
 
 
 function getCookie(name) {
