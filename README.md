@@ -22,15 +22,24 @@ There is currently a wroking web based implementation that requires a local data
 * Clone repository and perform prerequisite steps outlines above.
 * Create a local DB called Algobot
 * Update .env file with your perspective credentials 
-* Run migration -  ```python manage.py makemigrations``` && ```python manage.py migrate ```
-* Start development server -  ``` python manage.py runserver  ```
+* Run migration  
+```python
+python manage.py makemigrations && python manage.py migrate 
+```
+* Start development server 
+``` python
+python manage.py runserver  
+```
 
-### Command Line Application Installation
+#### Command Line Application Installation
 The command line implementation of the algorithmic trading bot demonstrates the more practical features of portfolio management.
 * Clone repository and perform prerequisite steps outlines above.
 * Navigate to "Algobot-UI\Algobot_Backend" 
 * Find file "portfolio_manager.py"
-* Run file using python -m portfolio_manager.py
+* Run file using 
+``` python
+python -m portfolio_manager.py 
+```
 
 ## Authors
 * Alejandro Rojas
