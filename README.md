@@ -30,6 +30,7 @@ python manage.py makemigrations && python manage.py migrate
 ``` python
 python manage.py runserver  
 ```
+* Navigate to 127.0.0.1:8000 on your browser to view your current portfolio.
 
 #### Command Line Application Installation
 The command line implementation of the algorithmic trading bot demonstrates the more practical features of portfolio management.
