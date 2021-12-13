@@ -2,14 +2,17 @@
 * Algobot-UI Is an algorithmic trading platform that introduces user to the concept of algorithmic trading.
 
 ## Installation (How to)
-  * Web Based Installation
+
+### Web Based Installation
+There is currently a wroking web based implementation that requires a local database.
   * Create a local DB called Algobot
   * Update .env file with your perspective credentials 
   * Install Packages -  ``` pip install -r requirements.txt``` from the terminal 
   * Run migration -  ```python manage.py makemigrations``` && ```python manage.py migrate ```
   * Start development server -  ``` python manage.py runserver  ```
 
-** GUI
+### GUI
+The GUI implementation demonstrates the more practical features of portfolio management.
 * For GUI 
 
 ## Authors
