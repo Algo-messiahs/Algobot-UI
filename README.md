@@ -2,8 +2,14 @@
 * Algobot-UI Is an algorithmic trading platform that introduces user to the concept of algorithmic trading.
 
 ## Installation (How to)
+
 ### Prerequisites
-Use of either of these applications requires the use of 
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all necessary libraries.
+```bash
+pip install -r requirements.txt
+```
+Use of either of these applications requires the use of the Alpaca API, https://app.alpaca.markets/signup
+After creating account api Keys must be generated.
 
 #### Web Application Installation
 There is currently a wroking web based implementation that requires a local database.
@@ -13,7 +19,7 @@ There is currently a wroking web based implementation that requires a local data
 * Run migration -  ```python manage.py makemigrations``` && ```python manage.py migrate ```
 * Start development server -  ``` python manage.py runserver  ```
 
-###$ Command Line Application Installation
+### Command Line Application Installation
 The command line implementation of the algorithmic trading bot demonstrates the more practical features of portfolio management.
 * Clone repository
 *  
