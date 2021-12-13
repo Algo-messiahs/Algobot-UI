@@ -10,6 +10,7 @@ pip install -r requirements.txt
 ```
 * Use of either of these applications requires the use of the Alpaca API, https://app.alpaca.markets/signup
 After creating an account the api Keys must be generated.
+* Navigate to the path "Algobot-UI\Algobot_Backend" there us a file named config.py edit it with your alpaca account information as seen below. 
 ```python
 APCA_API_BASE_URL = "https://paper-api.alpaca.markets"
 APCA_API_KEY_ID = "Your Key Id Here"
@@ -18,16 +19,18 @@ APCA_API_SECRET_KEY = "Your Secret Key Here"
 
 #### Web Application Installation
 There is currently a wroking web based implementation that requires a local database.
+* Clone repository and perform prerequisite steps outlines above.
 * Create a local DB called Algobot
 * Update .env file with your perspective credentials 
-* Install Packages -  ``` pip install -r requirements.txt``` from the terminal 
 * Run migration -  ```python manage.py makemigrations``` && ```python manage.py migrate ```
 * Start development server -  ``` python manage.py runserver  ```
 
 ### Command Line Application Installation
 The command line implementation of the algorithmic trading bot demonstrates the more practical features of portfolio management.
-* Clone repository
-*  
+* Clone repository and perform prerequisite steps outlines above.
+* Navigate to "Algobot-UI\Algobot_Backend" 
+* Find file "portfolio_manager.py"
+* Run file using python -m portfolio_manager.py
 
 ## Authors
 * Alejandro Rojas
