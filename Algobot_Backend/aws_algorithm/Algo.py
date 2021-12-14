@@ -42,12 +42,12 @@ def sell(q, s): # Returns nothing, makes call to sell stock
         type='market',
         time_in_force='gtc'
     )
-
+# Add you sql database keys here
 mydb = mysql.connector.connect(
-  host="stock-db.c0fblm3kalfm.us-west-1.rds.amazonaws.com",
-  user="admin",
-  password="13579100",
-  database="stockdb"
+  host="",
+  user="",
+  password="",
+  database=""
 )
 
 mycursor = mydb.cursor()
