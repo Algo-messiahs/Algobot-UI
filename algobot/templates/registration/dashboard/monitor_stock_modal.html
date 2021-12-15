@@ -1,0 +1,39 @@
+<form action="{% url 'algobot:sell_stock' %}" method="POST" id="frm_sell_position">
+    {% csrf_token %}
+    <div class="modal fade" id="sellStockModal" tabindex="-1" role="dialog" aria-labelledby="sellStockModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Sell Stocks</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Select Stock</label>
+                        <select class="form-control" id="stockPosition_sell">
+                            <option value="None">-- Select --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Shares</label>
+                        <select class="form-control" id="shares_sell" >
+                            <option value="None">-- Select --</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-danger" id="btn_confirm_sell"/>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

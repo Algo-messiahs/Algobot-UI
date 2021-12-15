@@ -26,3 +26,4 @@ gunicorn
 simplejson
 django_heroku
 whitenoise
+mysql-connector-python
