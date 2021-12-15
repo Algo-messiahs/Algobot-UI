@@ -85,4 +85,5 @@ def sell_stock():
 #     return {'user': user_as_json}
 #
 # See the README documentation for more examples.
-#
+# reference: https://youtu.be/TKAo_Z-hzQs
+# used to understand how chalice and alpaca api work together
