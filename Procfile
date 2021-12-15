@@ -1,2 +1,3 @@
 #Procfile
-web: gunicorn Algobot_Heroku.wsgi --log-file -
+release: python manage.py migrate
+web: gunicorn Algobot_Heroku.wsgi
