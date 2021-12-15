@@ -24,4 +24,4 @@ alpaca-trade-api
 requests
 gunicorn
 simplejson
-static
+django_heroku
