@@ -22,6 +22,6 @@ django-environ
 bootstrap-py
 alpaca-trade-api
 requests
-
+gunicorn
 
 
