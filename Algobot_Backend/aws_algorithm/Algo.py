@@ -84,3 +84,6 @@ while True:
         pos_held = False
     
     time.sleep(60)
+
+# reference: https://youtu.be/TKAo_Z-hzQs
+# used to understand how chalice and alpaca api work together
