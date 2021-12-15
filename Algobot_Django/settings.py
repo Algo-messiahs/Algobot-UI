@@ -18,7 +18,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,6 +31,8 @@ SECRET_KEY = 'django-insecure-@5evh1uk*s!^k9c*)b+ou#t17+#ye4q#bxjdpc#@5$1vrek=^0
 DEBUG = True
 
 ALLOWED_HOSTS = ['evening-everglades-82303.herokuapp.com']
+
+
 
 
 # Application definition
@@ -90,13 +92,15 @@ DATABASES = {
         'PORT': env("DATABASE_PORT"),
     }
 }
-# path -> example/setting.py
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # baltlogs.com
 
