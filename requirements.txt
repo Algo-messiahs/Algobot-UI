@@ -24,5 +24,4 @@ alpaca-trade-api
 requests
 gunicorn
 simplejson
-
-
+static
