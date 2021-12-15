@@ -25,3 +25,4 @@ requests
 gunicorn
 simplejson
 django_heroku
+whitenoise
